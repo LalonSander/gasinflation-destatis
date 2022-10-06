@@ -27,10 +27,9 @@ jobs:
       - name: Run Script
         run: |
              python gas_destatis.py
-        
-      - uses: stefanzweifel/git-auto-commit-action@v4
-          with:
-            commit_message: Update gas data
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update gas data
              
       - name: Push Changes
         if: steps.auto-commit-action.outputs.changes_detected == 'true'
