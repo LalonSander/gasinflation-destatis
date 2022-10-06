@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
       
       - name: Setup Python
         uses: actions/setup-python@v2
@@ -25,11 +27,13 @@ jobs:
       - name: Run Script
         run: |
              python gas_destatis.py
+        uses: stefanzweifel/git-auto-commit-action@v4
+          with:
+            commit_message: Apply php-cs-fixer changes
              
-      - name: Commit and Push Changes
+      - name: Push Changes
+        if: steps.auto-commit-action.outputs.changes_detected == 'true'
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add energie_wasser.csv
-          git commit -m "Inflationsdaten aktualisiert"
           git push origin main
