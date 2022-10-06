@@ -27,7 +27,8 @@ jobs:
       - name: Run Script
         run: |
              python gas_destatis.py
-        uses: stefanzweifel/git-auto-commit-action@v4
+      
+      - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update gas data
              
